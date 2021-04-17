@@ -1,0 +1,60 @@
+.nav-container {
+    height: 100vh; /* For 100% screen height */
+    overflow-y: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    max-width: 125px;
+}
+
+
+/*Logo Tabs*/
+.main-logo{
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+
+/*Navigation Tabs*/
+.navigation-column-bar {
+    background-color: white;
+}
+
+.bg-gold {
+    color: #e6d486;
+}
+
+.border {
+    border-radius: 30px;
+}
+
+hr {
+    color:#b3a568;
+    margin-left: 2rem; 
+    margin-right: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/*Bottom Tabs*/
+.link-column-bar {
+
+    .button-twitter {
+        background-color: #ccbd77;
+        border-radius: 30px;
+
+        i {
+            color: whitesmoke;
+        }
+    }
+
+    .button-discord {
+        background-color: #b3a568;
+        border-radius: 30px;
+
+        i {
+            color: whitesmoke;
+        }
+    }
+}
+

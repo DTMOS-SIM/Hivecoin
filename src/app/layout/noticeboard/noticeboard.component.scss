@@ -1,0 +1,35 @@
+.notice-container {
+    height: 100vh; /* For 100% screen height */
+    overflow-y: scrolls;
+    padding-top: 1.2rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    max-width: 210px;
+    right: 0%;
+    top: 0%;
+    position: absolute;
+}
+
+.card {
+    border-radius: 20px;
+    background-color: #332f1e;
+}
+
+.button-profile {
+    background-color: #665e3c;
+    border-radius: 15px;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    i {
+        color: whitesmoke;
+    }
+}
+
+
+hr {
+    color:#b3a568;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
