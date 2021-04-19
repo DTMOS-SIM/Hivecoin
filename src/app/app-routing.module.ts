@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/main/dashboard/dashboard.component';
 import { MainComponent } from './pages/main/main.component';
 
@@ -12,9 +13,13 @@ const routes: Routes = [
         path: "dashboard",
         component: DashboardComponent
       },
-      { path: "**", redirectTo: "/v1" },
-      { path: " ", redirectTo: "/v1" }
+      { path: "**", redirectTo: "/dashboard" },
+      { path: " ", redirectTo: "/dashboard" }
     ]
+  },
+  {
+    path: "login",
+    component: LoginComponent
   },
   /*
   .
@@ -24,8 +29,8 @@ const routes: Routes = [
   .
   .
   */
-  { path: "**", redirectTo: "/v1" },
-  { path: " ", redirectTo: "/v1" },
+  { path: "**", redirectTo: "/v1/dashboard" },
+  { path: " ", redirectTo: "/v1/dashboard" },
 ];
 
 @NgModule({

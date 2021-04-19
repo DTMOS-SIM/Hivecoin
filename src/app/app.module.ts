@@ -8,6 +8,8 @@ import { NoticeboardComponent } from './layout/noticeboard/noticeboard.component
 import { MainComponent } from './pages/main/main.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/main/dashboard/dashboard.component';
+import { Web3Service } from './utils/services/web3service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { DashboardComponent } from './pages/main/dashboard/dashboard.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [Web3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
