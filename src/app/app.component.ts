@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SimpleStorageContract } from './utils/contract';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HivecoinApp';
+  constructor(private contract: SimpleStorageContract) {}
 }

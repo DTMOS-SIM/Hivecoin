@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Web3Service } from '../../../utils/services/web3service';
+import { ethers } from 'ethers';
+import { Observable } from 'rxjs';
+import { Web3Service } from 'src/app/utils/services/web3service';
+import { AppSigner } from '../../../../app/utils/app-signer';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,28 +17,46 @@ export class DashboardComponent implements OnInit {
     year: 0,
     owner: null
   }
+  accounts: Array<string> = [];
+  signer: any = null;
+  file: File | null = null;
 
   constructor(private web3Service: Web3Service) {
-    console.log('Constructor: ' + web3Service);
   }
 
-  getUser() {
-    this.web3Service.getUser().then(data => {
-      this.User.year = data.year ?? data.year | 0;
-      this.User.name = data.name;
-      this.User.owner = data.owner;
-    }).catch(error => {
-      window.alert(error)
-    });
+  async ngOnInit() {
+    await this.web3Service.getAccounts().then((acct) => {
+      this.accounts.push(acct[0]);
+    }).catch(error => console.log(error))
+    await this.web3Service.getSigner(this.accounts[0]).then((signer) => {
+      this.signer = signer
+      console.log(this.signer)
+    })
   }
 
-  setUser() {
-    this.web3Service.setUser(this.User.name, this.User.year).then((data) => {
-      console.log("successfully completed with: " + data)
-    }).catch(error => {
-      window.alert(error)
-    });
+  handleFileInput(event: any) {
+    this.file = event.files!.item(0);
+    let reader: FileReader = new FileReader();
+    if (this.file) {
+      reader.readAsText(this.file);
+      reader.onload = (e) => {
+        let loadFile = reader.result;
+        console.log(loadFile)
+        let loadString = JSON.stringify(loadFile);
+        console.log(loadString);
+      }
+    }
   }
 
-  ngOnInit(): void {}
+  async deployDocuments() {
+    try {
+      if (this.signer) {
+        this.web3Service.deployDocumentStore(this.signer).then((result) => {
+          console.log(result)
+        })
+      }
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }
 }
