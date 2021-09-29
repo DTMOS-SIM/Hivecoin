@@ -9,16 +9,6 @@ import { MainComponent } from './pages/main/main.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/main/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { WEB3PROVIDER } from './utils/web3-provider';
-import detectEthereumProvider from '@metamask/detect-provider';
-import { Web3Service } from './utils/services/web3service';
-
-
-export function enableWeb3Provider(_provider: any) {
-  return () => {
-    detectEthereumProvider();
-  };
-}
 
 @NgModule({
   declarations: [
@@ -33,14 +23,6 @@ export function enableWeb3Provider(_provider: any) {
     BrowserModule,
     AppRoutingModule,
     FormsModule
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: enableWeb3Provider,
-      deps: [WEB3PROVIDER],
-      multi: true
-    },
   ],
   bootstrap: [AppComponent]
 })

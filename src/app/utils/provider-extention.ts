@@ -8,7 +8,7 @@ import { Network } from "@ethersproject/networks"
 export class Provider extends providers.BaseProvider {
 
   constructor() {
-    let network = environment.network as unknown as Network
+    let network = environment.network.custom as unknown as Network
     super(network);
   }
   // Implement custom method here

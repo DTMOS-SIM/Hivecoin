@@ -1,30 +1,32 @@
 <div class="d-flex justify-content-center align-items-center">
-    <div class="p-2">
-        <div class="input-group mb-3">
-            <span class="input-group-text">Name</span>
-            <input type="text" class="form-control" id="name" name="name">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Age</span>
-            <input type="number" class="form-control" id="age" name="age">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
-            <input id="address" name="name" type="text" class="form-control" disabled>
-        </div>
-        <div class="form-group">
-            <label for="file">Choose File</label>
-            <input type="file"
-                   id="file"
-                   (change)="handleFileInput($event.target)">
-        </div>
-        <div class="d-grid gap-2">
-            <button class="btn btn-warning" type="button">getUser</button>
-            <button class="btn btn-warning" type="button">setUser</button>
-            <button class="btn btn-warning" type="button" (click)="deployDocuments()">Deploy</button>
-        </div>
-        <div class="input-group mb-3 mt-5" *ngIf="accounts.length > 0">
-            <span class="input-group-text" id="inputGroup-sizing-default">{{accounts[0]}}</span>
-        </div>
+  <div class="p-3">
+    <h5>Certificate Configurations</h5>
+    <div class="form-group mb-3">
+      <label for="file">Choose Wallet File</label>
+      <input type="file" id="file" (change)="loadJsonWallet($event.target)">
     </div>
+    <h5>Store Configurations</h5>
+    <div class="form-group mb-3">
+      <label for="file">Choose File</label>
+      <input type="file" id="file" (change)="handleFileInput($event.target)">
+    </div>
+    <div class="d-grid gap-2">
+
+      <button class="btn btn-warning" type="button" (click)="deployDocuments()">Deploy Document Store</button>
+      <button class="btn btn-warning" type="button" (click)="connectDocumentStore()">Connect Document Store</button>
+      <button class="btn btn-warning" type="button" (click)="issueDocument()">Issue Certificate</button>
+      <div *ngIf="fileUrl">
+        <a [href]="fileUrl" download="certificate.json">DownloadFile</a>
+      </div>
+    </div>
+    <div class="input-group mb-3 mt-5">
+        <input id="accounts" name="name" type="text" class="form-control" [(ngModel)]="accounts" disabled>
+    </div>
+    <div class="input-group mb-3 mt-5">
+      <input id="address" name="name" type="text" class="form-control" [(ngModel)]="address" disabled>
+    </div>
+    <div class="input-group mb-3 mt-5">
+      <input name="name" type="text" class="form-control" [(ngModel)]="deployedContractAddress" disabled>
+    </div>
+  </div>
 </div>

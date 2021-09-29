@@ -370,10 +370,17 @@ export const environment = {
   ],
   contractAddress: '0xe00d75A739E5E2EDCA7CC78c07a1BC3b4A3Bc0E5',
   network: {
-    name: 'Localhost',
-    chainId: 1337,
-    ensAddress: 'http://localhost:7545',
-  }
+    custom: {
+      name: 'Localhost',
+      chainId: 1337,
+      ensAddress: 'http://localhost:7545',
+    },
+    ropsten: {
+      name: 'ropsten',
+      chainId: 3,
+    }
+  },
+  etherscanId: 'GM2S6MUPWMZ22B6FQDI1F376FUTY48VRQ1'
 };
 
 /*
