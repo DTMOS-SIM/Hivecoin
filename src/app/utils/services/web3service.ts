@@ -79,6 +79,13 @@ export class Web3Service {
 
   }
 
+  /**
+    * Nothing stored in web3service
+    * @param document Wrapped document
+    * @param signer Signer
+    * @description sign a wrapped document with the current signer
+    * @returns Promise of any
+    */
   async signWrappedDocument(document: any, signer: Signer): Promise<any> {
     try {
       const signedDoc = signDocument(document, SUPPORTED_SIGNING_ALGORITHM.Secp256k1VerificationKey2018, signer);
@@ -88,16 +95,32 @@ export class Web3Service {
     }
   }
 
+  /**
+    * Nothing stored in web3service
+    * @param wrappedDocument Wrapped document
+    * @description validate schema of a signed and wrapped document
+    * @returns Promise of boolean
+    */
   async validateSchema(wrappedDocument: any): Promise<boolean>  {
     const verified = await verifySignature(wrappedDocument);
     return verified
   }
 
+  /**
+    * Nothing stored in web3service
+    * @param wrappedDocument Wrapped document
+    * @description validate signature a signed and wrapped document
+    * @returns Promise of boolean
+    */
   async validateSignature(wrappedDocument: any): Promise<boolean>  {
     const verified = await verifySignature(wrappedDocument);
     return verified
   }
-
+  /**
+    * Nothing stored in web3service
+    * @description create a new wallet from EtherscanProvider
+    * @returns Wallet class
+    */
   async newWalletFromEtherscan() {
     const provider = new providers.EtherscanProvider(environment.network.ropsten, environment.etherscanId);
     const wallet = Wallet.createRandom();

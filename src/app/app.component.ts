@@ -7,6 +7,6 @@ import { SimpleStorageContract } from './utils/contract';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'HivecoinApp';
+  title = 'OpenAttestationTemplate';
   constructor(private contract: SimpleStorageContract) {}
 }

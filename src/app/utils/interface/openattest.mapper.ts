@@ -4,7 +4,8 @@ export interface IOpenAttest {
     name: string,
     issuers: Issuer[],
     recipient: IRecipient,
-    $template: IOARenderer
+    $template: IOARenderer,
+    proof?: any
 };
 
 export interface IOwnerProof {

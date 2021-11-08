@@ -5,6 +5,7 @@ import { UpgradableDocumentStore } from '@govtechsg/document-store';
 import { IOpenAttest } from 'src/app/utils/interface/openattest.mapper';
 import { ContractReceipt } from '@ethersproject/contracts';
 import { DomSanitizer } from '@angular/platform-browser';
+import { obfuscateDocument } from '@govtechsg/open-attestation';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
         let loadFile = reader.result;
         let loadDoc: IOpenAttest = JSON.parse(loadFile as string);
         if (loadDoc) {
+          console.log(loadDoc)
           this.wrapNsignDocument(loadDoc);
         }
       }
@@ -66,7 +68,7 @@ export class DashboardComponent implements OnInit {
       } else {
         console.log("Documents wrapped!");
         console.log("Signing documents....");
-        let signedDocument = await this.web3Service.signWrappedDocument(wrappedDocument[0], this.signer);
+        let signedDocument = await this.web3Service.signWrappedDocument(wrappedDocument[1], this.signer);
         console.log(signedDocument)
         if (signedDocument.message) {
           console.log(signedDocument)
@@ -75,7 +77,7 @@ export class DashboardComponent implements OnInit {
           let SchemaIntegrity = await this.web3Service.validateSchema(signedDocument)
           let SignatureIntegrity = await this.web3Service.validateSignature(signedDocument)
           if (SchemaIntegrity && SignatureIntegrity) {
-            this.merkleRoot = signedDocument.proof[0].signature;
+            this.merkleRoot = `0x${signedDocument.signature.merkleRoot}`;
             const item = await this.encodeJson(signedDocument);
             this.fileUrl = this.sanitiser.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(item));
             alert("Documents verified and signed! Ready for deployment.")
@@ -131,6 +133,8 @@ export class DashboardComponent implements OnInit {
   }
 
   async encodeJson(obj: any): Promise<Blob> {
+    //Remove proof section from json so that it is readable by opencert verifier
+    delete obj["proof"];
     const str = JSON.stringify(obj);
     const bytes = new TextEncoder().encode(str);
     const blob = new Blob([bytes], {
